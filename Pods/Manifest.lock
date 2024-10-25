@@ -1,0 +1,22 @@
+PODS:
+  - SampleDevpod (0.4.0)
+
+DEPENDENCIES:
+  - "SampleDevpod (from `git@github.com:balrajverma/SampleDevpod.git`, branch `main`)"
+
+EXTERNAL SOURCES:
+  SampleDevpod:
+    :branch: main
+    :git: "git@github.com:balrajverma/SampleDevpod.git"
+
+CHECKOUT OPTIONS:
+  SampleDevpod:
+    :commit: dd1c8042dd8092ccc365f2be66a224bbd6a231e9
+    :git: "git@github.com:balrajverma/SampleDevpod.git"
+
+SPEC CHECKSUMS:
+  SampleDevpod: 6ce1a666ae1fe1ebcbb9da117d2846e36282ad66
+
+PODFILE CHECKSUM: 0e772aceaaba2c70d1908254ebc84647b3bcc3e7
+
+COCOAPODS: 1.15.2

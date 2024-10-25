@@ -1,0 +1,6 @@
+framework module Pods_MultipleVarientDevpodMainApp {
+  umbrella header "Pods-MultipleVarientDevpodMainApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

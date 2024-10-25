@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "1600"
+   version = "1.7">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "Automatic">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "#!/bin/bash&#10;#constant &#10;CURRENT_CONFIG_FILE=&quot;${SOURCE_ROOT}/current_config.txt&quot;&#10;LAST_CONFIG_FILE=&quot;${SOURCE_ROOT}/previous_config.txt&quot;&#10;PROJECT_PATH=&quot;${SOURCE_ROOT}/MultipleVarientDevpodMainApp.xcodeproj&quot;&#10;#replace with your project name and file name &#10;&#10;if [ ! -f &quot;$CURRENT_CONFIG_FILE&quot; ]; then &#10;    exit 1&#10;fi&#10;&#10;if [ ! -f &quot;$LAST_CONFIG_FILE&quot; ]; then &#10;    exit 1&#10;fi&#10;&#10;echo &quot;Files are in the path, move to the next step.&quot;&#10;BUILD_SETTINGS=$(xcodebuild -project &quot;$PROJECT_PATH&quot; -showBuildSettings)&#10;BUILD_CONFIGURATION=$(echo &quot;$BUILD_SETTINGS&quot; | grep -i &apos;CONFIGURATION=&apos; | awk -F&apos; = &apos; &apos;{print $2}&apos; | head -n 1)&#10;&#10;if [ -z &quot;$BUILD_CONFIGURATION&quot; ]; then &#10;    BUILD_CONFIGURATION=$(echo &quot;$BUILD_SETTINGS&quot; | awk &apos;/CONFIGURATION/ {print $3}&apos; | head -n 1)&#10;fi&#10;&#10;if [ -n &quot;$BUILD_CONFIGURATION&quot; ]; then &#10;    echo &quot;$BUILD_CONFIGURATION&quot; &gt; &quot;$CURRENT_CONFIG_FILE&quot;&#10;    echo &quot;$CURRENT_CONFIG_FILE: $BUILD_CONFIGURATION&quot;&#10;else &#10;    echo &quot;Failed to fetch build configurations&quot;&#10;fi&#10;&#10;if diff &quot;$CURRENT_CONFIG_FILE&quot; &quot;$LAST_CONFIG_FILE&quot; &gt; /dev/null; then&#10;    # Files are the same &#10;    echo &quot;4th step&quot;&#10;    exit 0 &#10;else &#10;    echo &quot;Files are different, run pod install&quot;&#10;    echo &quot;$BUILD_CONFIGURATION&quot; &gt; &quot;$LAST_CONFIG_FILE&quot;&#10;    osascript &lt;&lt;END&#10;tell application &quot;Terminal&quot;&#10;    if not (exists window 1) then reopen &#10;    activate &#10;    do script &quot;cd ${SOURCE_ROOT}; pod install&quot; in window 1&#10;end tell&#10;END&#10;fi&#10;"
+               shellToInvoke = "/bin/sh">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "B78315982CBC606F0046E932"
+                     BuildableName = "MultipleVarientDevpodMainApp.app"
+                     BlueprintName = "MultipleVarientDevpodMainApp"
+                     ReferencedContainer = "container:MultipleVarientDevpodMainApp.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B78315982CBC606F0046E932"
+               BuildableName = "MultipleVarientDevpodMainApp.app"
+               BlueprintName = "MultipleVarientDevpodMainApp"
+               ReferencedContainer = "container:MultipleVarientDevpodMainApp.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B78315982CBC606F0046E932"
+            BuildableName = "MultipleVarientDevpodMainApp.app"
+            BlueprintName = "MultipleVarientDevpodMainApp"
+            ReferencedContainer = "container:MultipleVarientDevpodMainApp.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B78315982CBC606F0046E932"
+            BuildableName = "MultipleVarientDevpodMainApp.app"
+            BlueprintName = "MultipleVarientDevpodMainApp"
+            ReferencedContainer = "container:MultipleVarientDevpodMainApp.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>
